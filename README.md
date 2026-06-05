@@ -1,7 +1,7 @@
 APIs
 customers:
 GET http://localhost:8000/customers
-GET http://localhost:8000/customers/top5
+GET http://localhost:8000/customers/top-five
 GET http://localhost:8000/customers/<any_id_from_previous_response>
 
 invoices
