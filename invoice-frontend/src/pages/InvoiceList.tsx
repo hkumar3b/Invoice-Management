@@ -1,14 +1,18 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { invoicesApi, type Invoice, type InvoiceFilters } from '../api/invoices';
-import Badge from '../components/Badge';
-import Spinner from '../components/Spinner';
-import Pagination from '../components/Pagination';
-import Modal from '../components/Modal';
-import InvoiceForm from '../components/InvoiceForm';
-import './InvoiceList.css';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  invoicesApi,
+  type Invoice,
+  type InvoiceFilters,
+} from "../api/invoices";
+import Badge from "../components/Badge";
+import Spinner from "../components/Spinner";
+import Pagination from "../components/Pagination";
+import Modal from "../components/Modal";
+import InvoiceForm from "../components/InvoiceForm";
+import "./InvoiceList.css";
 
-const STATUSES = ['', 'Sent', 'Unpaid', 'Overdue', 'Paid', 'Void', 'Draft'];
+const STATUSES = ["", "Sent", "Unpaid", "Overdue", "Paid", "Void", "Draft"];
 
 export default function InvoiceList() {
   const navigate = useNavigate();
@@ -23,10 +27,10 @@ export default function InvoiceList() {
   const [filters, setFilters] = useState<InvoiceFilters>({
     page: 1,
     limit: 20,
-    sortBy: 'dueDate',
-    sortOrder: 'desc',
-    status: '',
-    customer: '',
+    sortBy: "dueDate",
+    sortOrder: "desc",
+    status: "",
+    customer: "",
   });
 
   const fetchInvoices = async () => {
@@ -51,7 +55,8 @@ export default function InvoiceList() {
     setFilters((prev) => ({
       ...prev,
       sortBy: field,
-      sortOrder: prev.sortBy === field && prev.sortOrder === 'asc' ? 'desc' : 'asc',
+      sortOrder:
+        prev.sortBy === field && prev.sortOrder === "asc" ? "desc" : "asc",
       page: 1,
     }));
   };
@@ -88,8 +93,8 @@ export default function InvoiceList() {
   };
 
   const sortIcon = (field: string) => {
-    if (filters.sortBy !== field) return ' ↕';
-    return filters.sortOrder === 'asc' ? ' ↑' : ' ↓';
+    if (filters.sortBy !== field) return " ↕";
+    return filters.sortOrder === "asc" ? " ↑" : " ↓";
   };
 
   return (
@@ -99,7 +104,7 @@ export default function InvoiceList() {
         <div className="invoice-list__header-actions">
           <button
             className="btn btn--secondary"
-            onClick={() => navigate('/summary')}
+            onClick={() => navigate("/summary")}
           >
             Summary
           </button>
@@ -117,25 +122,27 @@ export default function InvoiceList() {
         <input
           className="filter-input"
           placeholder="Search customer..."
-          value={filters.customer || ''}
-          onChange={(e) => handleFilter('customer', e.target.value)}
+          value={filters.customer || ""}
+          onChange={(e) => handleFilter("customer", e.target.value)}
         />
         <select
           className="filter-select"
-          value={filters.status || ''}
-          onChange={(e) => handleFilter('status', e.target.value)}
+          value={filters.status || ""}
+          onChange={(e) => handleFilter("status", e.target.value)}
         >
           {STATUSES.map((s) => (
-            <option key={s} value={s}>{s || 'All Status'}</option>
+            <option key={s} value={s}>
+              {s || "All Status"}
+            </option>
           ))}
         </select>
         <input
-  className="filter-input"
-  type="date"
-  value={filters.issueDateFrom || ''}
-  onChange={(e) => handleFilter('issueDateFrom', e.target.value)}
-  placeholder="Date"
-/>
+          className="filter-input"
+          type="date"
+          value={filters.issueDateFrom || ""}
+          onChange={(e) => handleFilter("issueDateFrom", e.target.value)}
+          placeholder="Date"
+        />
       </div>
 
       {/* Table */}
@@ -147,54 +154,47 @@ export default function InvoiceList() {
             <thead>
               <tr>
                 <th>Invoice</th>
-                <th
-                  className="sortable"
-                  onClick={() => handleSort('customer')}
-                >
+                <th className="sortable" onClick={() => handleSort("customer")}>
                   Customer
                 </th>
-                <th
-                  className="sortable"
-                  onClick={() => handleSort('amount')}
-                >
-                  Amount{sortIcon('amount')}
+                <th className="sortable" onClick={() => handleSort("amount")}>
+                  Amount{sortIcon("amount")}
                 </th>
                 <th>Tax%</th>
-                <th
-                  className="sortable"
-                  onClick={() => handleSort('total')}
-                >
-                  Total{sortIcon('total')}
+                <th className="sortable" onClick={() => handleSort("total")}>
+                  Total{sortIcon("total")}
                 </th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
-  {invoices.map((inv) => (
-    <tr
-      key={inv._id}
-      className="clickable-row"
-      onClick={() => setEditInvoice(inv)}
-    >
-      <td className="invoice-id">{inv.invoiceId}</td>
-      <td>
-        <span
-          className="customer-link"
-          onClick={(e) => {
-            e.stopPropagation();
-            navigate(`/customers/${inv.customer._id}`);
-          }}
-        >
-          {inv.customer.name}
-        </span>
-      </td>
-      <td>₹{inv.amount.toLocaleString()}</td>
-      <td>{inv.taxRate}%</td>
-      <td>₹{inv.total.toLocaleString()}</td>
-      <td><Badge status={inv.status} /></td>
-    </tr>
-  ))}
-</tbody>
+              {invoices.map((inv) => (
+                <tr
+                  key={inv._id}
+                  className="clickable-row"
+                  onClick={() => setEditInvoice(inv)}
+                >
+                  <td className="invoice-id">{inv.invoiceId}</td>
+                  <td>
+                    <span
+                      className="customer-link"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/customers/${inv.customer._id}`);
+                      }}
+                    >
+                      {inv.customer.name}
+                    </span>
+                  </td>
+                  <td>₹{inv.amount.toLocaleString()}</td>
+                  <td>{inv.taxRate}%</td>
+                  <td>₹{inv.total.toLocaleString()}</td>
+                  <td>
+                    <Badge status={inv.status} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       )}
