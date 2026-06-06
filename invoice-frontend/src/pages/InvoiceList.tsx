@@ -120,8 +120,8 @@ export default function InvoiceList() {
       {/* Filters */}
       <div className="invoice-list__filters">
         <input
-          className="filter-input"
-          placeholder="Search customer..."
+          className="filter-input filter-input--search"
+          placeholder="Search invoice / customer..."
           value={filters.customer || ""}
           onChange={(e) => handleFilter("customer", e.target.value)}
         />
@@ -132,16 +132,27 @@ export default function InvoiceList() {
         >
           {STATUSES.map((s) => (
             <option key={s} value={s}>
-              {s || "All Status"}
+              {s || "Status"}
             </option>
           ))}
         </select>
+        <select
+          className="filter-select"
+          value={filters.taxRate || ""}
+          onChange={(e) => handleFilter("taxRate", e.target.value)}
+        >
+          <option value="">Tax Rate</option>
+          <option value="0">0%</option>
+          <option value="3">3%</option>
+          <option value="5">5%</option>
+          <option value="18">18%</option>
+          <option value="28">28%</option>
+        </select>
         <input
-          className="filter-input"
+          className="filter-input filter-input--date"
           type="date"
           value={filters.issueDateFrom || ""}
           onChange={(e) => handleFilter("issueDateFrom", e.target.value)}
-          placeholder="Date"
         />
       </div>
 

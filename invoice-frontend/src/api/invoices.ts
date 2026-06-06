@@ -63,4 +63,5 @@ export interface InvoiceFilters {
   issueDateTo?: string;
   dueDateFrom?: string;
   dueDateTo?: string;
+  taxRate?: string;
 }

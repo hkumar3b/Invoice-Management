@@ -24,19 +24,32 @@
 
 .invoice-list__filters {
   display: flex;
+  align-items: center;
   gap: 10px;
-  flex-wrap: wrap;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
+
 
 .filter-input,
 .filter-select {
-  padding: 8px 12px;
+  padding: 8px 14px;
   border: 1px solid #d1d5db;
-  border-radius: 6px;
+  border-radius: 20px;
   font-size: 13px;
   color: #374151;
   background: #fff;
+  height: 36px;
+}
+
+.filter-input--search {
+  width: 260px;
+  border-radius: 20px;
+}
+
+.filter-input--date {
+  width: 150px;
+  border-radius: 20px;
 }
 
 .filter-input:focus,
