@@ -1,0 +1,163 @@
+.profile {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.profile__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.profile__breadcrumb-link {
+  color: #3b82f6;
+  cursor: pointer;
+}
+
+.profile__breadcrumb-link:hover {
+  text-decoration: underline;
+}
+
+.profile__breadcrumb-sep {
+  color: #d1d5db;
+}
+
+.profile__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.profile__avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile__name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.profile__company {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.profile__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.profile__breakdown {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.breakdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.breakdown-item--paid {
+  background: #e6f4ea;
+  color: #1e7e34;
+}
+
+.breakdown-item--unpaid {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.breakdown-item--overdue {
+  background: #fde8e8;
+  color: #c0392b;
+}
+
+.profile__section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 16px;
+}
+
+.profile__history {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.profile__table-wrapper {
+  overflow-x: auto;
+}
+
+.profile__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.profile__table thead tr {
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.profile__table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+}
+
+.profile__table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+}
+
+.profile__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.profile__table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.profile-error {
+  padding: 48px;
+  text-align: center;
+  color: #6b7280;
+}
+
+@media (max-width: 768px) {
+  .profile__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .profile__breakdown {
+    flex-wrap: wrap;
+  }
+}
