@@ -1,0 +1,93 @@
+.invoice-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.invoice-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.invoice-form__field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.invoice-form__field input,
+.invoice-form__field select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #111827;
+  background: #fff;
+}
+
+.invoice-form__field input:disabled {
+  background: #f9fafb;
+  color: #6b7280;
+}
+
+.invoice-form__field input:focus,
+.invoice-form__field select:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+
+.invoice-form__row {
+  display: flex;
+  gap: 16px;
+}
+
+.invoice-form__summary {
+  background: #f9fafb;
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.invoice-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 8px;
+}
+
+.btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn--primary {
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.btn--primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn--secondary {
+  background: #fff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.btn--secondary:hover {
+  background: #f3f4f6;
+}
