@@ -158,7 +158,7 @@ export default function InvoiceList() {
             {filters.issueDateFrom ? filters.issueDateFrom : "Date"}
           </span>
           <input
-            id="date-input"
+            className="filter-date"
             type="date"
             value={filters.issueDateFrom || ""}
             onChange={(e) => handleFilter("issueDateFrom", e.target.value)}
