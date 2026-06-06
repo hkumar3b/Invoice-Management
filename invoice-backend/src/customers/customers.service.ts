@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Customer, CustomerDocument } from './customer.schema';
 import { Invoice, InvoiceDocument } from '../invoices/invoice.schema';
 
@@ -54,52 +54,52 @@ export class CustomersService {
 
   // GET /customers/:id
   async getProfile(id: string) {
-    const customer = await this.customerModel.findById(id).lean();
+  const customer = await this.customerModel.findById(id).lean();
 
-    if (!customer) {
-      throw new NotFoundException(`Customer with id ${id} not found`);
-    }
+  if (!customer) {
+    throw new NotFoundException(`Customer with id ${id} not found`);
+  }
 
-    const invoices = await this.invoiceModel
-      .find({ customer: id })
-      .lean();
+  const invoices = await this.invoiceModel
+    .find({ customer: new Types.ObjectId(id) })
+    .lean();
 
-    const summary = await this.invoiceModel.aggregate([
-      { $match: { customer: customer._id } },
-      {
-        $group: {
-          _id: null,
-          totalInvoices: { $count: {} },
-          totalAmount: { $sum: '$total' },
-          paidAmount: {
-            $sum: {
-              $cond: [{ $eq: ['$status', 'Paid'] }, '$total', 0],
-            },
+  const summary = await this.invoiceModel.aggregate([
+    { $match: { customer: new Types.ObjectId(id) } },
+    {
+      $group: {
+        _id: null,
+        totalInvoices: { $count: {} },
+        totalAmount: { $sum: '$total' },
+        paidAmount: {
+          $sum: {
+            $cond: [{ $eq: ['$status', 'Paid'] }, '$total', 0],
           },
-          unpaidAmount: {
-            $sum: {
-              $cond: [{ $eq: ['$status', 'Unpaid'] }, '$total', 0],
-            },
+        },
+        unpaidAmount: {
+          $sum: {
+            $cond: [{ $eq: ['$status', 'Unpaid'] }, '$total', 0],
           },
-          overdueAmount: {
-            $sum: {
-              $cond: [{ $eq: ['$status', 'Overdue'] }, '$total', 0],
-            },
+        },
+        overdueAmount: {
+          $sum: {
+            $cond: [{ $eq: ['$status', 'Overdue'] }, '$total', 0],
           },
         },
       },
-    ]);
+    },
+  ]);
 
-    return {
-      customer,
-      invoices,
-      summary: summary[0] || {
-        totalInvoices: 0,
-        totalAmount: 0,
-        paidAmount: 0,
-        unpaidAmount: 0,
-        overdueAmount: 0,
-      },
-    };
-  }
+  return {
+    customer,
+    invoices,
+    summary: summary[0] || {
+      totalInvoices: 0,
+      totalAmount: 0,
+      paidAmount: 0,
+      unpaidAmount: 0,
+      overdueAmount: 0,
+    },
+  };
+}
 }
