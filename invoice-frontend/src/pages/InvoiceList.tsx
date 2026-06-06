@@ -112,7 +112,7 @@ export default function InvoiceList() {
             className="btn btn--primary"
             onClick={() => setShowModal(true)}
           >
-            + New Invoice
+            New Invoice
           </button>
         </div>
       </div>
@@ -121,39 +121,49 @@ export default function InvoiceList() {
       <div className="invoice-list__filters">
         <input
           className="filter-input filter-input--search"
-          placeholder="Search invoice / customer..."
+          placeholder="Search invoice / customer"
           value={filters.customer || ""}
           onChange={(e) => handleFilter("customer", e.target.value)}
         />
-        <select
-          className="filter-select"
-          value={filters.status || ""}
-          onChange={(e) => handleFilter("status", e.target.value)}
+        <div className="filter-dropdown">
+          <select
+            value={filters.status || ""}
+            onChange={(e) => handleFilter("status", e.target.value)}
+          >
+            {STATUSES.map((s) => (
+              <option key={s} value={s}>
+                {s || "Status"}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="filter-dropdown">
+          <select
+            value={filters.taxRate || ""}
+            onChange={(e) => handleFilter("taxRate", e.target.value)}
+          >
+            <option value="">Tax rate</option>
+            <option value="0">0%</option>
+            <option value="3">3%</option>
+            <option value="5">5%</option>
+            <option value="18">18%</option>
+            <option value="28">28%</option>
+          </select>
+        </div>
+        <div
+          className="filter-date"
+          onClick={() => document.getElementById("date-input")?.click()}
         >
-          {STATUSES.map((s) => (
-            <option key={s} value={s}>
-              {s || "Status"}
-            </option>
-          ))}
-        </select>
-        <select
-          className="filter-select"
-          value={filters.taxRate || ""}
-          onChange={(e) => handleFilter("taxRate", e.target.value)}
-        >
-          <option value="">Tax Rate</option>
-          <option value="0">0%</option>
-          <option value="3">3%</option>
-          <option value="5">5%</option>
-          <option value="18">18%</option>
-          <option value="28">28%</option>
-        </select>
-        <input
-          className="filter-input filter-input--date"
-          type="date"
-          value={filters.issueDateFrom || ""}
-          onChange={(e) => handleFilter("issueDateFrom", e.target.value)}
-        />
+          <span className="filter-date__label">
+            {filters.issueDateFrom ? filters.issueDateFrom : "Date"}
+          </span>
+          <input
+            id="date-input"
+            type="date"
+            value={filters.issueDateFrom || ""}
+            onChange={(e) => handleFilter("issueDateFrom", e.target.value)}
+          />
+        </div>
       </div>
 
       {/* Table */}

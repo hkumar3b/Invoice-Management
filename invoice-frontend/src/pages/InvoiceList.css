@@ -22,41 +22,88 @@
   gap: 10px;
 }
 
+/* Filters */
 .invoice-list__filters {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
-
-.filter-input,
-.filter-select {
-  padding: 8px 14px;
+.filter-input--search {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 16px;
   border: 1px solid #d1d5db;
-  border-radius: 20px;
+  border-radius: 6px;
   font-size: 13px;
   color: #374151;
   background: #fff;
   height: 36px;
 }
 
-.filter-input--search {
-  width: 260px;
-  border-radius: 20px;
-}
-
-.filter-input--date {
-  width: 150px;
-  border-radius: 20px;
-}
-
-.filter-input:focus,
-.filter-select:focus {
+.filter-input--search:focus {
   border-color: #3b82f6;
+  outline: none;
 }
 
+.filter-dropdown {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  height: 36px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.filter-dropdown select {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  color: #374151;
+  cursor: pointer;
+  padding: 0;
+}
+
+.filter-dropdown select:focus {
+  outline: none;
+}
+
+.filter-date {
+  position: relative;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  height: 36px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.filter-date__label {
+  font-size: 13px;
+  color: #374151;
+  pointer-events: none;
+}
+
+.filter-date input[type="date"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  background: transparent;
+}
+
+/* Table */
 .invoice-table-wrapper {
   background: #fff;
   border: 1px solid #e5e7eb;
@@ -96,6 +143,7 @@
   padding: 12px 16px;
   border-bottom: 1px solid #f3f4f6;
   color: #374151;
+  white-space: nowrap;
 }
 
 .invoice-table tbody tr:last-child td {
@@ -122,16 +170,45 @@
   text-decoration: underline;
 }
 
-.action-btn {
-  background: none;
-  border: 1px solid #d1d5db;
-  border-radius: 4px;
-  padding: 4px 10px;
-  font-size: 12px;
-  color: #374151;
+.clickable-row {
   cursor: pointer;
 }
 
-.action-btn:hover {
+.clickable-row:hover {
+  background: #f0f7ff !important;
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn--primary {
+  background: #fff;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: #eff6ff;
+}
+
+.btn--primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn--secondary {
+  background: #fff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.btn--secondary:hover {
   background: #f3f4f6;
 }
