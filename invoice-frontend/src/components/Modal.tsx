@@ -1,12 +1,6 @@
 import { useEffect } from 'react';
 import './css/Modal.css';
 
-interface ModalProps {
-  title: string;
-  onClose: () => void;
-  children: React.ReactNode;
-}
-
 export default function Modal({ title, onClose, children }: ModalProps) {
   // Close on Escape key
   useEffect(() => {
@@ -28,4 +22,10 @@ export default function Modal({ title, onClose, children }: ModalProps) {
       </div>
     </div>
   );
+}
+
+interface ModalProps {
+  title: string;
+  onClose: () => void;
+  children: React.ReactNode;
 }

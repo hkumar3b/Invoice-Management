@@ -1,13 +1,5 @@
 import './css/Pagination.css';
 
-interface PaginationProps {
-  page: number;
-  totalPages: number;
-  total: number;
-  limit: number;
-  onPageChange: (page: number) => void;
-}
-
 export default function Pagination({
   page,
   totalPages,
@@ -62,4 +54,12 @@ export default function Pagination({
       </div>
     </div>
   );
+}
+
+interface PaginationProps {
+  page: number;
+  totalPages: number;
+  total: number;
+  limit: number;
+  onPageChange: (page: number) => void;
 }
