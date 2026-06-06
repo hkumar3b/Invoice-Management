@@ -130,33 +130,12 @@ export default function InvoiceList() {
           ))}
         </select>
         <input
-          className="filter-input"
-          type="date"
-          value={filters.issueDateFrom || ''}
-          onChange={(e) => handleFilter('issueDateFrom', e.target.value)}
-          placeholder="Issue from"
-        />
-        <input
-          className="filter-input"
-          type="date"
-          value={filters.issueDateTo || ''}
-          onChange={(e) => handleFilter('issueDateTo', e.target.value)}
-          placeholder="Issue to"
-        />
-        <input
-          className="filter-input"
-          type="date"
-          value={filters.dueDateFrom || ''}
-          onChange={(e) => handleFilter('dueDateFrom', e.target.value)}
-          placeholder="Due from"
-        />
-        <input
-          className="filter-input"
-          type="date"
-          value={filters.dueDateTo || ''}
-          onChange={(e) => handleFilter('dueDateTo', e.target.value)}
-          placeholder="Due to"
-        />
+  className="filter-input"
+  type="date"
+  value={filters.issueDateFrom || ''}
+  onChange={(e) => handleFilter('issueDateFrom', e.target.value)}
+  placeholder="Date"
+/>
       </div>
 
       {/* Table */}
@@ -188,43 +167,34 @@ export default function InvoiceList() {
                   Total{sortIcon('total')}
                 </th>
                 <th>Status</th>
-                <th
-                  className="sortable"
-                  onClick={() => handleSort('dueDate')}
-                >
-                  Due Date{sortIcon('dueDate')}
-                </th>
-                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {invoices.map((inv) => (
-                <tr key={inv._id}>
-                  <td className="invoice-id">{inv.invoiceId}</td>
-                  <td>
-                    <span
-                      className="customer-link"
-                      onClick={() => navigate(`/customers/${inv.customer._id}`)}
-                    >
-                      {inv.customer.name}
-                    </span>
-                  </td>
-                  <td>₹{inv.amount.toLocaleString()}</td>
-                  <td>{inv.taxRate}%</td>
-                  <td>₹{inv.total.toLocaleString()}</td>
-                  <td><Badge status={inv.status} /></td>
-                  <td>{new Date(inv.dueDate).toLocaleDateString('en-IN')}</td>
-                  <td>
-                    <button
-                      className="action-btn"
-                      onClick={() => setEditInvoice(inv)}
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+  {invoices.map((inv) => (
+    <tr
+      key={inv._id}
+      className="clickable-row"
+      onClick={() => setEditInvoice(inv)}
+    >
+      <td className="invoice-id">{inv.invoiceId}</td>
+      <td>
+        <span
+          className="customer-link"
+          onClick={(e) => {
+            e.stopPropagation();
+            navigate(`/customers/${inv.customer._id}`);
+          }}
+        >
+          {inv.customer.name}
+        </span>
+      </td>
+      <td>₹{inv.amount.toLocaleString()}</td>
+      <td>{inv.taxRate}%</td>
+      <td>₹{inv.total.toLocaleString()}</td>
+      <td><Badge status={inv.status} /></td>
+    </tr>
+  ))}
+</tbody>
           </table>
         </div>
       )}
